@@ -1,6 +1,7 @@
 from hashids import Hashids
 import Redis
 import random
+import config
 
 
 class UrlShortener:
