@@ -2,35 +2,39 @@ from hashids import Hashids
 import Redis
 import random
 import config
-
+import time
 
 class UrlShortener:
     def __init__(self):
         self.redis = redis.StrictRedis(host=config.REDIS_HOST,
                                        port=config.REDIS_PORT,
                                        db=config.REDIS_DB)
-        self.dict={}
         
+        self.dict={}
+
     def shortcode(self, url):
-		randomno=random.randint(100,99999)
-		hashids = Hashids()
+		
+		hashids = Hashids(min_length=5)
+        randomno= self.randomuniquegenerator()
 		hashid = hashids.encrypt(randomno)
-		self.dict[randomno]=url
-		redis.set(hashid,dict)
-        return 
+        return hashid
+
+    def randomuniquegenerator():
+        tm=(time.time()/10000)
+        random=random.randrange(100000,99999)
+        if random > tm:
+            return random - tm
+        else:
+            return tm -random
 
     def shorten(self, url):
-        """
-        The shortening workflow is very minimal. We try to
-        set the redis key to the url value. We catch any
-        exception in the process to properly report failures
-        in the client
-        """
-
-        code = self.shortcode(url)
+        hashid = self.shortcode(url)
         
         try:
-            self.redis.set(config.REDIS_PREFIX + code, url)
+            self.dict['url']=url
+            self.dict['']
+            self.redis.hmset(hashid,)
+            self.redis.hmset(config.REDIS_PREFIX + code, url)
             return {'success': True,
                     'url': url,
                     'code': code,
