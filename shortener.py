@@ -32,24 +32,25 @@ class UrlShortener:
         
         try:
             self.dict['url']=url
-            self.dict['']
-            self.redis.hmset(hashid,)
-            self.redis.hmset(config.REDIS_PREFIX + code, url)
-            return {'success': True,
-                    'url': url,
-                    'code': code,
-                    'shorturl': config.URL_PREFIX + code}
+            self.dict['hits']=0;
+            if(!self.redis.exists(hashid)):
+                self.redis.hmset(hashid,self.dict)
+                return {'success': True,
+                        'url': url,
+                        'shorturl': hashid}
+            else:
+                return shorten(url)
         except:
             return {'success': False}
 
-    def lookup(self, code):
+    def lookup(self, hashid):
         """
         The same strategy is used for the lookup than for the
         shortening. Here a None reply will imply either an
         error or a wrong code.
         """
         try:
-            return self.redis.get(config.REDIS_PREFIX + code)
+            return self.redis.hvals(hashid)
         except:
             return None
 
