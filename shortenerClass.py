@@ -3,6 +3,7 @@ import Redis
 import random
 import config
 import time
+from bottle import route
 
 class UrlShortener:
     def __init__(self):
@@ -27,7 +28,12 @@ class UrlShortener:
         else:
             return tm -random
 
-    def shorten(self, url):
+    def addUrl(self, url):
+        u = urlparse.urlparse(request.form['url'])
+        if u.netloc == '':
+            url = 'http://' + request.form['url']
+        else:
+            url = request.form['url']
         hashid = self.shortcode(url)
         
         try:
@@ -43,12 +49,7 @@ class UrlShortener:
         except:
             return {'success': False}
 
-    def lookup(self, hashid):
-        """
-        The same strategy is used for the lookup than for the
-        shortening. Here a None reply will imply either an
-        error or a wrong code.
-        """
+    def shortLookup(self, hashid):
         try:
             return self.redis.hvals(hashid)
         except:
