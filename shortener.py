@@ -1,17 +1,26 @@
-from bottle import route, run 
+#!venv/bin/python
 import urllib2
 from shortenerClass import UrlShortener
+from flask import Flask, jsonify
+from flask import abort
+from flask import make_response
+import json
+from flask import request
+from flask import url_for
 
-app = Bottle()
+
+
+
+app = Flask(__name__,static_url_path='')
 short = UrlShortener()
 
 @app.route('/')
 def index():
-    return "Hello"
+    return app.send_static_file('index.html')
 
-@app.route('/<shorturl>', method='GET')
+@app.route('/<shorturl>', methods=['GET'])
 def lookup( shorturl):
-	if (shortlookup(shorturl)!=NONE ):
+	if (short.shortLookup(shorturl)):
 		result = "exists"
 	else:
 		result = "no"
@@ -30,20 +39,16 @@ def site_exists(url):
 
 
 
-@app.route('/put/', method='POST')
+@app.route('/put', methods=['POST'])
 def add():
-	siteurl=request.forms.get('url')
+	siteurl=request.form['url']
 	if(site_exists(siteurl)):
-		short.addUrl('siteurl')
-		return "Success"
+		hashid=short.addUrl('siteurl')
+		return json.dumps(hashid)
 	else:
 		return "Site Does Not Exist"
 
 
 
-
-if __name__ == "__main__":
-    run(host='localhost', port=8080)
-
-
-app = bottle.default_app()
+if __name__ == '__main__':
+    app.run(debug=True)

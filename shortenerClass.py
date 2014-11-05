@@ -3,7 +3,9 @@ import redis
 import random
 import config
 import time
-from bottle import route
+from flask import request
+import urlparse
+import math
 
 class UrlShortener:
     def __init__(self):
@@ -19,13 +21,14 @@ class UrlShortener:
         hashid = hashids.encrypt(randomno)
         return hashid
 
-    def randomuniquegenerator():
-        tm=(time.time()/10000)
-        random=random.randrange(100000,99999)
-        if random > tm:
-            return random - tm
+    def randomuniquegenerator(self):
+        tm=int (math.floor(time.time()/10000))
+        randomno=random.randrange(100000,999999)
+        if randomno > tm:
+            return randomno - tm
         else:
-            return tm -random
+            return tm -randomno
+
 
     def addUrl(self, url):
         u = urlparse.urlparse(request.form['url'])
@@ -35,18 +38,15 @@ class UrlShortener:
             url = request.form['url']
         hashid = self.shortcode(url)
         
-        try:
-            self.dict['url']=url
-            self.dict['hits']=0;
-            if(not self.redis.exists(hashid)):
-                self.redis.hmset(hashid,self.dict)
-                return {'success': True,
-                        'url': url,
-                        'shorturl': hashid}
-            else:
-                return shorten(url)
-        except:
-            return {'success': False}
+        self.dict['url']=url
+        self.dict['hits']=0;
+        if(not self.redis.exists(hashid)):
+            self.redis.hmset(hashid,self.dict)
+            return {'success': True,
+                    'url': url,
+                    'shorturl': hashid}
+        else:
+            return self.addUrl(url)
 
     def shortLookup(self, hashid):
         try:
