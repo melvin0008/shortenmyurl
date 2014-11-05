@@ -1,5 +1,5 @@
 from hashids import Hashids
-import Redis
+import redis
 import random
 import config
 import time
@@ -14,10 +14,9 @@ class UrlShortener:
         self.dict={}
 
     def shortcode(self, url):
-		
-		hashids = Hashids(min_length=5)
-        randomno= self.randomuniquegenerator()
-		hashid = hashids.encrypt(randomno)
+        hashids = Hashids(min_length=5)
+        randomno = self.randomuniquegenerator()
+        hashid = hashids.encrypt(randomno)
         return hashid
 
     def randomuniquegenerator():
@@ -39,7 +38,7 @@ class UrlShortener:
         try:
             self.dict['url']=url
             self.dict['hits']=0;
-            if(!self.redis.exists(hashid)):
+            if(not self.redis.exists(hashid)):
                 self.redis.hmset(hashid,self.dict)
                 return {'success': True,
                         'url': url,

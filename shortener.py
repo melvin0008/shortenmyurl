@@ -11,20 +11,22 @@ def index():
 
 @app.route('/<shorturl>', method='GET')
 def lookup( shorturl):
-	if shortlookup(shorturl)!=NONE :
-		return"exists"
-	else
-    	return"no" 
+	if (shortlookup(shorturl)!=NONE ):
+		result = "exists"
+	else:
+		result = "no"
+	return result
+     
 
 
 def site_exists(url):
 	try:
-    	urllib2.urlopen(url)
-    	return True
+		urllib2.urlopen(url)
+		return True
 	except urllib2.HTTPError, e:
-    	return False
+		return False
 	except urllib2.URLError, e:
-    	return False
+		return False
 
 
 
@@ -33,10 +35,15 @@ def add():
 	siteurl=request.forms.get('url')
 	if(site_exists(siteurl)):
 		short.addUrl('siteurl')
-    else:
-    	return "Site Does Not Exist"
+		return "Success"
+	else:
+		return "Site Does Not Exist"
 
 
 
 
-run(host='localhost', port=8080, debug=True)
+if __name__ == "__main__":
+    run(host='localhost', port=8080)
+
+
+app = bottle.default_app()
