@@ -33,7 +33,7 @@ def lookup( shorturl):
      
 
 
-def site_exists(url):
+"""def site_exists(url):
 	try:
 		urllib2.urlopen(url)
 		return True
@@ -41,7 +41,7 @@ def site_exists(url):
 		return False
 	except urllib2.URLError, e:
 		return False
-
+"""
 
 
 @app.route('/put', methods=['POST'])
@@ -53,7 +53,7 @@ def add():
 	else:
 		url = siteurl
 	
-	if(site_exists(url)):
+	if(True):
 		hashid=short.addUrl('siteurl')
 		return "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
 	else:
