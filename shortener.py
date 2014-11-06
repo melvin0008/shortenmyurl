@@ -44,8 +44,7 @@ def site_exists(url):
 @app.route('/put', methods=['POST'])
 def add():
 	siteurl=request.form['url']
-	#if(site_exists(siteurl)):
-	if(True):
+	if(site_exists(siteurl)):
 		hashid=short.addUrl('siteurl')
 		return json.dumps(hashid)
 	else:
