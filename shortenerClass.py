@@ -12,8 +12,7 @@ class UrlShortener:
     def __init__(self):
         self.redis = redis.StrictRedis(host=configlocal.REDIS_HOST,
                                        port=configlocal.REDIS_PORT,
-                                       password=configlocal.REDIS_PASSWORD,
-                                       db=configlocal.REDIS_DB)
+                                       password=configlocal.REDIS_PASSWORD)
         
         self.dict={}
 
