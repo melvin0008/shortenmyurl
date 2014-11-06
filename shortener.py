@@ -15,7 +15,8 @@ app = Flask(__name__,static_url_path='')
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
-myurl="https://shortenmyurl.herokuapp.com/"
+#myurl="https://shortenmyurl.herokuapp.com/"
+myurl="127.0.0.1:5000/"
 
 @app.route('/')
 def index():
@@ -48,7 +49,7 @@ def add():
 	siteurl=request.form['url']
 	if(site_exists(siteurl)):
 		hashid=short.addUrl('siteurl')
-		return "Visit : "+"<a href='"+myurl+hashid+"'>link</a>" + " for the short url"
+		return "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
 	else:
 		return "Site Does Not Exist"
 
