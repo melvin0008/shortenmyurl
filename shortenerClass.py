@@ -1,19 +1,19 @@
 from hashids import Hashids
 import redis
 import random
+import config
 import time
 from flask import request
 import urlparse
 import math
-
-
+import configlocal
 
 class UrlShortener:
-    def __init__(self,app):
-        self.redis = redis.StrictRedis(host=app.config['REDIS_HOST'],
-                                       port=app.config['REDIS_PORT'],
-                                       password=app.config['REDIS_PASSWORD']
-                                       db=1)
+    def __init__(self):
+        self.redis = redis.StrictRedis(host=configlocal.REDIS_HOST,
+                                       port=configlocal.REDIS_PORT,
+                                       password=configlocal.REDIS_PASSWORD,
+                                       db=configlocal.REDIS_DB)
         
         self.dict={}
 
