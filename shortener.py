@@ -43,7 +43,7 @@ def site_exists(url):
 def add():
 	siteurl=request.form['url']
 	#if(site_exists(siteurl)):
-	if(True)
+	if(True):
 		hashid=short.addUrl('siteurl')
 		return json.dumps(hashid)
 	else:
