@@ -1,7 +1,7 @@
 #!venv/bin/python
 import urllib2
 from shortenerClass import UrlShortener
-from flask import Flask, jsonify
+from flask import Flask, jsonify ,redirect
 from flask import abort
 from flask import make_response
 import json
@@ -15,6 +15,7 @@ app = Flask(__name__,static_url_path='')
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
+myurl="https://shortenmyurl.herokuapp.com/"
 
 @app.route('/')
 def index():
@@ -24,7 +25,7 @@ def index():
 def lookup( shorturl):
 	url=short.shortLookup(shorturl)
 	if (url):
-		redirect(url)
+		result=redirect(url[0])
 	else:
 		result = "no"
 	return result
@@ -47,7 +48,7 @@ def add():
 	siteurl=request.form['url']
 	if(site_exists(siteurl)):
 		hashid=short.addUrl('siteurl')
-		return json.dumps(hashid)
+		return "Visit : "+"<a href='"+myurl+hashid+"'>link</a>" + " for the short url"
 	else:
 		return "Site Does Not Exist"
 

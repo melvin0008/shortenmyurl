@@ -41,9 +41,7 @@ class UrlShortener:
         self.dict['hits']=0;
         if(not self.redis.exists(hashid)):
             self.redis.hmset(hashid,self.dict)
-            return {'success': True,
-                    'url': url,
-                    'shorturl': hashid}
+            return hashid
         else:
             return self.addUrl(url)
 
