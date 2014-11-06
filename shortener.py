@@ -8,11 +8,13 @@ import json
 from flask import request
 from flask import url_for
 
-
+from config import Heroku
 
 
 app = Flask(__name__,static_url_path='')
-short = UrlShortener()
+heroku=Heroku(app)
+heroku.init_app(app)
+short = UrlShortener(app)
 
 @app.route('/')
 def index():
@@ -50,6 +52,5 @@ def add():
 		return "Site Does Not Exist"
 
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
