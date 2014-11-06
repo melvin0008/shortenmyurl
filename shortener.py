@@ -55,7 +55,7 @@ def add():
 		url = siteurl
 	
 	if(True):
-		hashid=short.addUrl(siteurl)
+		hashid=short.addUrl(url)
 		return "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
 	else:
 		return "Site Does Not Exist"
