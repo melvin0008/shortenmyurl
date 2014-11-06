@@ -22,8 +22,9 @@ def index():
 
 @app.route('/<shorturl>', methods=['GET'])
 def lookup( shorturl):
-	if (short.shortLookup(shorturl)):
-		result = "exists"
+	url=short.shortLookup(shorturl)
+	if (url):
+		redirect(url)
 	else:
 		result = "no"
 	return result
