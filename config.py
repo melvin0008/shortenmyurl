@@ -1,5 +1,6 @@
-import os
-
-REDIS_HOST = os.getenv("REDIS_HOST", "greeneye")
-REDIS_PORT = int(os.getenv("REDIS_PORT", "11156"))
-REDIS_DB = int(os.getenv("REDIS_DB", "1"))
+redis_url = environ.get('REDISTOGO_URL')
+if redis_url: 
+    url = urlparse(redis_url)
+    app.config.setdefault('REDIS_HOST', url.hostname)
+	app.config.setdefault('REDIS_PORT', url.port)
+    app.config.setdefault('REDIS_PASSWORD', url.password)
