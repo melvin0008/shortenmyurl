@@ -30,11 +30,6 @@ class UrlShortener:
 
 
     def addUrl(self, url):
-        u = urlparse.urlparse(request.form['url'])
-        if u.netloc == '':
-            url = 'http://' + request.form['url']
-        else:
-            url = request.form['url']
         hashid = self.shortcode(url)
         
         self.dict['url']=url

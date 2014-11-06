@@ -47,7 +47,13 @@ def site_exists(url):
 @app.route('/put', methods=['POST'])
 def add():
 	siteurl=request.form['url']
-	if(site_exists(siteurl)):
+	u = urlparse.urlparse(siteurl)
+	if u.netloc == '':
+		url = 'http://' + siteurl
+	else:
+		url = siteurl
+	
+	if(site_exists(url)):
 		hashid=short.addUrl('siteurl')
 		return "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
 	else:
