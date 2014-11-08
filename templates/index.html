@@ -1,16 +1,17 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Micro</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
 </head>
 <body>
 <form action="/put" method="POST">
-	Type the url you want to shorten<input type="text" name="url"/>
-	<input type="submit" value ="Go" >
+	<input class="form-control" type="text" name="url" placeholder="Type the url you want to shorten"/>
+	<input class="btn btn-primary " type="submit" value ="Go" >
 	<br/>
 	{% if hashid %}
-    <a href="{{ hashid }}">{{myurl+hashid}}</a>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}">
+    <a class="btn btn-default" href="{{ hashid }}">{{myurl+hashid}}</a>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}" class="img-thumbnail">
     {% endif %}
     
 </form>
