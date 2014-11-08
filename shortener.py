@@ -17,8 +17,8 @@ app = Flask(__name__,static_url_path='')
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
-#myurl="https://shortenmyurl.herokuapp.com/"
-myurl="127.0.0.1:5000/"
+myurl="https://shortenmyurl.herokuapp.com/"
+#myurl="127.0.0.1:5000/"
 
 @app.route('/')
 def index():
