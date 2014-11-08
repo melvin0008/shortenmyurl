@@ -6,6 +6,7 @@ from flask import abort
 from flask import make_response
 import json
 import urlparse
+from flask import render_template
 from flask import request
 from flask import url_for
 
@@ -16,8 +17,8 @@ app = Flask(__name__,static_url_path='')
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
-myurl="https://shortenmyurl.herokuapp.com/"
-#myurl="127.0.0.1:5000/"
+#myurl="https://shortenmyurl.herokuapp.com/"
+myurl="127.0.0.1:5000/"
 
 @app.route('/')
 def index():
@@ -56,7 +57,8 @@ def add():
 	
 	if(True):
 		hashid=short.addUrl(url)
-		return "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
+		return render_template('index.html',myurl=myurl,hashid=hashid)
+		# "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
 	else:
 		return "Site Does Not Exist"
 
