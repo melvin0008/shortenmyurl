@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="/put" method="POST">
+	Type the url you want to shorten<input type="text" name="url"/>
+	<input type="submit" value ="Go" >
+	<br/>
+	{% if hashid %}
+    <a href="{{ hashid }}">{{myurl+hashid}}</a>
+    <img src="http://chart.apis.google.com/chart?cht=qr&chs=240x240&choe=UTF-8&chld=H&chl={{myurl+hashid}}">
+    {% endif %}
+    
+</form>
+</body>
+</html>
