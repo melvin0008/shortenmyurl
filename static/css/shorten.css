@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html{
+    max-width: 100%;
+    overflow-x: hidden
+}
+body{
+	margin: 0;
+     background: url('../images/text.jpg');
+     background-size: 1440px 800px;
+     background-repeat:no-repeat;
+    display: compact;
+}
+.jumbotron{
+    background: transparent;
+}

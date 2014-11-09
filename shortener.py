@@ -13,7 +13,7 @@ from flask import url_for
 #from config import Heroku
 
 
-app = Flask(__name__,static_url_path='')
+app = Flask(__name__)
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
