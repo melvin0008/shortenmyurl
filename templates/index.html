@@ -3,7 +3,7 @@
 <head>
 	<title>Micro</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-	  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,12 +21,7 @@
 					</span>
 				</div><!-- /input-group -->
 				
-				{% if hashid %}
-				<a class="btn btn-default" href="{{ hashid }}">Click Here</a> Your Shortened Url is :{{myurl+hashid}}
-				<div class="col-lg-4">
-					<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}" class="img-thumbnail">
-				</div>
-				{% endif %}
+				
 				<!-- <div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">Panel title</h3>
@@ -37,6 +32,19 @@
 				</div> -->
 
 			</form>
+		</div>
+		<div class="container">
+			{% if hashid %}
+
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<a class="btn btn-default" href="{{ hashid }}">Click Here</a> Your Shortened Url is :{{myurl+hashid}}
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}" class="img-thumbnail">
+			</div>
+			{% endif %}
 		</div>
 	</div>
 </body>
