@@ -17,7 +17,7 @@ app = Flask(__name__)
 #heroku=Heroku(app)
 #heroku.init_app(app)
 short = UrlShortener()
-myurl="https://shortenmyurl.herokuapp.com/"
+myurl="http://www.minurl.in/"
 #myurl="127.0.0.1:5000/"
 
 @app.route('/')
