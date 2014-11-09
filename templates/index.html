@@ -1,19 +1,34 @@
 <!doctype html>
-<html>
+<html lang='en'>
 <head>
 	<title>Micro</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<form action="/put" method="POST">
-	<input class="form-control span4" type="text" name="url" placeholder="Type the url you want to shorten"/>
-	<input class="btn btn-primary " type="submit" value ="Go" >
-	<br/>
-	{% if hashid %}
-    <a class="btn btn-default" href="{{ hashid }}">{{myurl+hashid}}</a>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}" class="img-thumbnail">
-    {% endif %}
-    
-</form>
+	<div class="container theme-showcase" role="main">
+		<div class="jumbotron">
+			<form action="/put" method="POST">
+				<div class="row">
+					<div class="col-lg-6">
+						<input class="form-control" type="text" name="url" placeholder="eg . htttps://google.com"/>
+						<input class="btn btn-primary " type="submit" value ="Go" >
+					<br/>
+					</div>
+				</div>
+				{% if hashid %}
+				<a class="btn btn-default" href="{{ hashid }}">{{myurl+hashid}}</a>
+				<div class="col-lg-4">
+					<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{myurl+hashid}}" class="img-thumbnail">
+				</div>
+				{% endif %}
+				
+			</form>
+		</div>
+	</div>
 </body>
 </html>
