@@ -5,5 +5,3 @@ redis_url = os.getenv('REDISTOGO_URL', 'redis://redistogo:9e87a450dd3ef9a69cd9b3
 
 
 #redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379');
-
-redis = redis.from_url(redis_url)

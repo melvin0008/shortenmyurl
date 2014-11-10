@@ -10,8 +10,7 @@ import config
 
 class UrlShortener:
     def __init__(self):
-        self.redis = config.redis
-        
+        self.redis = redis.from_url(config.redis_url)
         self.dict={}
 
     def shortcode(self, url):

@@ -16,7 +16,7 @@ from flask import url_for
 app = Flask(__name__)
 #heroku=Heroku(app)
 #heroku.init_app(app)
-short = UrlShortener()
+
 myurl="http://www.minurl.in/"
 #myurl="127.0.0.1:5000/"
 
@@ -26,6 +26,7 @@ def index():
 
 @app.route('/<shorturl>', methods=['GET'])
 def lookup( shorturl):
+	short = UrlShortener()
 	url=short.shortLookup(shorturl)
 	if (url):
 		result=redirect(url[0])
@@ -48,6 +49,7 @@ def lookup( shorturl):
 
 @app.route('/put', methods=['POST'])
 def add():
+	short = UrlShortener()
 	siteurl=request.form['url']
 	u = urlparse.urlparse(siteurl)
 	if u.netloc == '':
