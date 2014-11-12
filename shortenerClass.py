@@ -13,7 +13,7 @@ import os
 class UrlShortener:
     def __init__(self):
         url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
-        self.redis = redis.Redis(host=url.hostname, port=url.port, password=url.password)
+        self.redis = redis.Redis(host=url.hostname, port=url.port, password=url.password,db=1)
 
     def shortcode(self, url):
         hashids = Hashids(min_length=5)
