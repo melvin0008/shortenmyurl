@@ -14,7 +14,6 @@ class UrlShortener:
     def __init__(self):
         url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
         self.redis = redis.Redis(host=url.hostname, port=url.port, password=url.password)
-        self.dict={}
 
     def shortcode(self, url):
         hashids = Hashids(min_length=5)
@@ -34,17 +33,15 @@ class UrlShortener:
     def addUrl(self, url):
         hashid = self.shortcode(url)
         
-        self.dict['url']=url
-        self.dict['hits']=0;
         if(not self.redis.exists(hashid)):
-            self.redis.hmset(hashid,self.dict)
+            self.redis.set(hashid,url)
             return hashid
         else:
             return self.addUrl(url)
 
     def shortLookup(self, hashid):
         try:
-            return self.redis.hvals(hashid)
+            return self.redis.get(hashid)
         except:
             return None
 
