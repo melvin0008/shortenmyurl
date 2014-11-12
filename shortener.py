@@ -29,9 +29,9 @@ def lookup( shorturl):
 	short = UrlShortener()
 	url=short.shortLookup(shorturl)
 	if (url):
-		result=redirect(url[0])
+		result=redirect(url)
 	else:
-		result = "no"
+		result = "DatabaseConnection Limit Reached . Have To Update Your RedisToCloud Pack"
 	return result
      
 
