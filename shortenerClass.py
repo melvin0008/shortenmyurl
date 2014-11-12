@@ -6,11 +6,14 @@ import time
 from flask import request
 import urlparse
 import math
-import config
+
+import os
+
 
 class UrlShortener:
     def __init__(self):
-        self.redis = redis.from_url(config.redis_url)
+        url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
+        self.redis = redis.Redis(host=url.hostname, port=url.port, password=url.password)
         self.dict={}
 
     def shortcode(self, url):
