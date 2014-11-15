@@ -1,14 +1,10 @@
 #!venv/bin/python
-import urllib2
 from shortenerClass import UrlShortener
-from flask import Flask, jsonify ,redirect
-from flask import abort
-from flask import make_response
-import json
+from flask import Flask,redirect
 import urlparse
 from flask import render_template
 from flask import request
-from flask import url_for
+
 
 #from config import Heroku
 
