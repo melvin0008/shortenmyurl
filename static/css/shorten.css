@@ -12,10 +12,13 @@ html{
 }
 body{
 	margin: 0;
-     background: url('../images/text.jpg');
-     background-size: 1440px 800px;
-     background-repeat:no-repeat;
-    display: compact;
+
+       background: url('../images/text.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    
 }
 .jumbotron{
     background: transparent;
