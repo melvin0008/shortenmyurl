@@ -3,5 +3,9 @@ shortenmyurl
 
 Url Shortner
 
->>> r.get('OYvxB')
-'https://google.com'
+Minify any url to save time . Similar to TinyUrl
+Also generates QrCode .
+
+Technologies:
+Flask (Python)
+Redis
