@@ -10,7 +10,12 @@ import math
 import os
 
 
-class UrlShortener:
+class UrlShortener():
+    """Docstring for shortenerClass.UrlShortener
+    ========================================
+    UrlShortener(self)
+
+    """
     def __init__(self):
         url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
         self.redis = redis.Redis(host=url.hostname, port=url.port, password=url.password)
@@ -24,25 +29,28 @@ class UrlShortener:
     def randomuniquegenerator(self):
         tm=int (math.floor(time.time()/10000))
         randomno=random.randrange(100000,999999)
-        if randomno > tm:
+        if(randomno > tm) :
             return randomno - tm
         else:
-            return tm -randomno
+             return tm -randomno
 
 
-    def addUrl(self, url):
+    def addurl(self, url):
+        """Docstring for shortenerClass.UrlShortener.addUrl
+            ========================================
+            addUrl(self, url)
+        """
         hashid = self.shortcode(url)
-        
         if(not self.redis.exists(hashid)):
             self.redis.set(hashid,url)
             return hashid
         else:
-            return self.addUrl(url)
+            return self.addurl(url)
 
-    def shortLookup(self, hashid):
+    def shortlookup(self, hashid):
         try:
             return self.redis.get(hashid)
-        except:
+        except Exception:
             return None
 
 
