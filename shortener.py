@@ -32,5 +32,22 @@ def lookup(shorturl):
         Have To Update Your RedisToCloud Pack"
     return result
 
+@app.route('/put', methods=['POST'])
+def add():
+    short = UrlShortener()
+    siteurl=request.form['url']
+    u = urlparse.urlparse(siteurl)
+    if u.netloc == '':
+        url = 'http://' + siteurl
+    else:
+        url = siteurl
+
+    if(url):
+        hashid=short.addUrl(url)
+        return render_template('index.html',myurl=myurl,hashid=hashid)
+        # "Visit : "+"<a href='"+hashid+"'>"+myurl+hashid+"</a>" + " for the short url"
+    else:
+        return "Site Does Not Exist"
+
 if __name__ == '__main__':
         app.run(debug=True)
